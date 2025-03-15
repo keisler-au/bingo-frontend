@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "app",
-    "slug": "app",
+    "slug": "sandbox-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "scheme": "myapp",
@@ -10,7 +10,9 @@
     "ios": {
       "supportsTablet": true
     },
-    "android": {},
+    "android": {
+      "package": "com.keislerau.sandboxapp"
+    },
     "web": {
       "bundler": "metro",
       "output": "server"
