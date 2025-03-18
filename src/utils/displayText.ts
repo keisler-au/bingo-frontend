@@ -1,4 +1,3 @@
-import CompleteTaskModal from "../components/CompleteTaskModal";
 import { Player, Task as Square } from "../types";
 
 export const formatTime = (dateString: string) => {
@@ -31,9 +30,7 @@ const formatDisplayText = (attrType: string, attrValue: any) => {
       return attrValue;
   }
 };
-// TODO: TESTING
-// 1. Unit test
-// 2. Display break
+
 export const addDisplayTextDetails = (square: Square, playerId: number) => {
   const displayType =
     square.displayType == null

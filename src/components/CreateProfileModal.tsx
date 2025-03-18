@@ -1,5 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getItemAsync, setItemAsync } from "expo-secure-store";
 import {
   Modal,
@@ -33,9 +32,6 @@ const CreatePlayerModal = ({ displayModal, onClose }: CreatePlayerProps) => {
     name === undefined && getName();
   }, [displayModal, name]);
 
-  // TODO: TESTING
-  // 1. Unit test
-  // 2. They won't be able to enter the game and they won't know why
   const handleSubmit = async () => {
     if (loading) return;
     setLoading(true);
@@ -43,12 +39,13 @@ const CreatePlayerModal = ({ displayModal, onClose }: CreatePlayerProps) => {
       URLS.CREATE_PLAYER_URL,
       name,
     );
-    if (response && response?.ok) {
-      setName(response.player.name);
-      setItemAsync(STORAGE_KEYS.player, JSON.stringify(response.player));
+    if (response?.ok && !error) {
+      const player = (await response.json()).player;
+      setName(player.name);
+      setItemAsync(STORAGE_KEYS.player, JSON.stringify(player));
     }
     onClose();
-    // Allow Profile modal to close before opening Failed Connection modal
+    // Time for Profile modal to close before Failed-Connection modal opens
     setTimeout(() => setError(error), 50);
     setLoading(false);
   };
@@ -67,7 +64,7 @@ const CreatePlayerModal = ({ displayModal, onClose }: CreatePlayerProps) => {
             />
             <TouchableOpacity
               style={[styles.submitButton, { opacity: name === "" ? 0.5 : 1 }]}
-              disabled={name == ""}
+              disabled={name === ""}
               onPress={handleSubmit}
             >
               {loading ? (

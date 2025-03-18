@@ -3,13 +3,14 @@ import { View, Text, StyleSheet, Share } from "react-native";
 import useWebSocket from "react-use-websocket";
 import IconHeader from "./IconHeader";
 import { Feather, Ionicons } from "@expo/vector-icons";
+import * as Sentry from "sentry-expo";
 // @ts-ignore
 import BottomSheet from "react-native-simple-bottom-sheet";
 import { useNetInfo } from "@react-native-community/netinfo";
 // @ts-ignore
 import { isEqual } from "lodash";
 import { URLS } from "../constants";
-import { Game, Player, RootStackParamList, Task as Square } from "../types";
+import { RootStackParamList, Task as Square } from "../types";
 import {
   saveGameToStorage,
   saveToQueue,
@@ -20,13 +21,9 @@ import {
 import FailedConnectionModal from "./FailedConnectionModal";
 import RequestService from "../services";
 import GameGrid from "./GameGrid";
-import { useFocusEffect } from "@react-navigation/native";
 import { StackScreenProps } from "@react-navigation/stack";
 
 const webSocketConfig = {
-  // TODO: TESTING
-  // 1. Unit test
-  // 2. Increases risk that local updates will permanently fail to send
   heartbeat: {
     message: "heartbeat",
     returnMessage: "thump",
@@ -51,27 +48,19 @@ const Play = ({ route }: PlayProps) => {
   const netInfo = useNetInfo();
   const isOffline = !netInfo.isConnected;
 
-  const { sendJsonMessage, lastJsonMessage, getWebSocket } = useWebSocket<{
-    data: any;
-  }>(`${URLS.WEBSOCKET_UPDATES_URL}/${route.params.game.id}/${player.id}/`, {
-    onReconnectStop: () => setErrorModal(RequestService.WEBSOCKET_FAILURE),
-    filter: (message) =>
-      message?.data?.task && message.data.task.completed_by.id !== player.id,
-    ...webSocketConfig,
-  });
-  useFocusEffect(
-    React.useCallback(() => {
-      return () => {
-        const socket = getWebSocket();
-        socket && socket.close();
-      };
-    }, []),
+  const { sendJsonMessage, lastJsonMessage } = useWebSocket<{ data: any }>(
+    `${URLS.WEBSOCKET_UPDATES_URL}/${route.params.game.id}/${player.id}/`,
+    {
+      onReconnectStop: (e) => {
+        setErrorModal(RequestService.WEBSOCKET_FAILURE);
+        Sentry.Native.captureException(e);
+      },
+      filter: (message) =>
+        message?.data?.task && message.data.task.completed_by.id !== player.id,
+      ...webSocketConfig,
+    },
   );
 
-  // Receive remote update
-  // TODO: TESTING
-  // 1. Unit test
-  // 2. Earlier completed remote updates won't be applied
   useEffect(() => {
     if (lastJsonMessage?.data) {
       const recievedSquare = lastJsonMessage.data.task;
@@ -87,10 +76,6 @@ const Play = ({ route }: PlayProps) => {
     }
   }, [lastJsonMessage, game, player.id, route.params.game]);
 
-  // Send or Queue local update
-  // TODO: TESTING
-  // 1. Unit test
-  // 2. Offline updates not saved OR sent, Online updates not sent, Offline game not saved
   useEffect(() => {
     if (isOffline === null) return;
     if (isOffline && completedSquare) {
@@ -109,9 +94,6 @@ const Play = ({ route }: PlayProps) => {
   const shareContent = async () =>
     await Share.share({ message: route.params.game.code });
 
-  // TODO: TESTING
-  // 1. Unit test
-  // 2. Local task update won't be sent or saved
   const taskCompleted = async (square: Square) => {
     const currentSquare = game[square.grid_row][square.grid_column];
     const earliestSquare = verifyEarliestCompletedSquare(square, currentSquare);
@@ -132,7 +114,7 @@ const Play = ({ route }: PlayProps) => {
     <View style={styles.screenContainer}>
       <IconHeader icons={[{ type: "home-outline", path: "Home" }]} />
       <Text style={styles.gameCode}>Game Code</Text>
-      <View style={styles.shareContainer}>
+      <View testID="shareButton" style={styles.shareContainer}>
         <Text style={styles.code}>{route.params.game.code}</Text>
         <Feather name="share" onPress={shareContent} size={25} />
       </View>

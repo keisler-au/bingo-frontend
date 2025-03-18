@@ -1,6 +1,4 @@
-
-exclude: 'node_modules/'
-
+exclude: "node_modules/"
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -12,27 +10,11 @@ repos:
 
   - repo: local
     hooks:
-      - id: isort
-        name: isort
-        language: system
-        files: \.py$
-        entry: bash -c "cd backend && poetry run isort ."
-
-  - repo: local
-    hooks:
-      - id: black
-        name: black
-        language: system
-        files: \.py$
-        entry: bash -c "cd backend && poetry run black ."
-
-  - repo: local
-    hooks:
       - id: prettier
         name: prettier
         language: system
         files: \.(j|t)sx?|css|html|md|json$
-        entry: bash -c "cd frontend && npx prettier . --write --log-level warn"
+        entry: bash -c "npx prettier . --write --log-level warn"
 
   - repo: local
     hooks:
@@ -40,6 +22,6 @@ repos:
         name: eslint
         language: system
         files: \.[jt]sx?$
-        entry: bash -c "cd frontend && npx eslint . --fix"
+        entry: bash -c "npx eslint . --fix"
 
 fail_fast: true

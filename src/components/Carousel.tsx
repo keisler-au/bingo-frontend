@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef } from "react";
 import { Dimensions, StyleSheet } from "react-native";
 import Animated, {
   useAnimatedScrollHandler,

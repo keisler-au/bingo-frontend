@@ -1,4 +1,3 @@
-import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
@@ -19,9 +18,9 @@ const IconHeader = ({ icons, onPress }: IconHeaderProps) => {
         <TouchableOpacity
           key={index}
           onPress={() =>
-            icon.modal && typeof onPress === "function"
-              ? onPress()
-              : navigation.navigate(icon.path)
+            (icon.modal && !!onPress && onPress()) ||
+            (icon.path === "Home" && navigation.popToTop()) ||
+            navigation.navigate(icon.path)
           }
         >
           <Ionicons name={icon.type} size={30} />

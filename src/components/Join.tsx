@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   ActivityIndicator,
   View,
@@ -37,7 +37,6 @@ const JoinGameInput = () => {
 
   useEffect(() => {
     const enterPreviousGameCode = async () => {
-      // TODO: TESTING
       const storedGame = await getItemAsync(STORAGE_KEYS.offlineGameState);
       const game = JSON.parse(storedGame || "{}");
       if (game) {
@@ -53,7 +52,6 @@ const JoinGameInput = () => {
     enterPreviousGameCode();
   }, []);
 
-  // TODO: TESTING
   const handleChange = (text: string, index: number) => {
     if (!/^[A-Z0-9]*$/.test(text)) return;
     if (text.length > 1 && text.length < 6) return;
@@ -79,10 +77,7 @@ const JoinGameInput = () => {
     setActive(false);
     Keyboard.dismiss();
   };
-  // TODO: if player is offline then use saved game
-  // TODO: TESTING
-  // 1. Unit test
-  // 2. If it fails it will clearly be isolate to this function
+
   const connectToGame = async () => {
     handleGameEntry(
       URLS.JOIN_GAME_URL,
@@ -105,13 +100,18 @@ const JoinGameInput = () => {
             style={{ flexDirection: "row", gap: 11 }}
           >
             {index === 3 && (
-              <Text key={`dash-${index}`} style={styles.dash}>
+              <Text
+                key={`dash-${index}`}
+                testID={`dash-${index}`}
+                style={styles.dash}
+              >
                 {" "}
                 -{" "}
               </Text>
             )}
             <TextInput
               key={`input-${index}`}
+              testID={`input-${index}`}
               ref={(el) => (inputs.current[index] = el)}
               style={styles.input}
               autoCapitalize="characters"

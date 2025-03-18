@@ -9,9 +9,6 @@ export const getStoredPlayer = async () => {
   return storedPlayer ? JSON.parse(storedPlayer) : null;
 };
 
-// TODO: TESTING
-// 1. Unit test
-// 2. Offline updates will not get pushed
 export const saveToQueue = async (square: Square) => {
   const storedData = await getItemAsync(STORAGE_KEYS.offlineUpdatesQueue);
   const dataArray = storedData ? JSON.parse(storedData) : [];
@@ -19,9 +16,6 @@ export const saveToQueue = async (square: Square) => {
   setItemAsync(STORAGE_KEYS.offlineUpdatesQueue, JSON.stringify(dataArray));
 };
 
-// TODO: TESTING
-// 1. Unit test
-// 2. Offline updates will not get pushed
 export const sendSavedQueue = async (sendJsonMessage: Function) => {
   const offlineUpdates = await getItemAsync(STORAGE_KEYS.offlineUpdatesQueue);
   if (offlineUpdates) {
@@ -40,7 +34,6 @@ export const updateGame = (
   square = addDisplayTextDetails(square, playerId);
   let updated = game.map((row) => [...row]);
   updated[square.grid_row][square.grid_column] = square;
-
   return updated;
 };
 
@@ -51,9 +44,6 @@ export const saveGameToStorage = async (game: Game) => {
   );
 };
 
-// TODO: TESTING
-// 1. Unit test
-// 2. The earliest completed square will get overridden
 export const verifyEarliestCompletedSquare = (
   pushSquare: Square,
   currentSquare: Square,

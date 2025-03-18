@@ -7,12 +7,6 @@ import {
   TouchableOpacity,
   Text,
 } from "react-native";
-import { getItemAsync } from "expo-secure-store";
-import {
-  NavigationProp,
-  RouteProp,
-  useNavigation,
-} from "@react-navigation/native";
 import { Feather } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
 import IconHeader from "./IconHeader";
@@ -25,6 +19,7 @@ import { RootStackParamList } from "../types";
 import { reformatGame } from "../utils/gameActions";
 import useGameEntry from "../utils/useGameEntry";
 import { StackScreenProps } from "@react-navigation/stack";
+import { useNavigationState } from "@react-navigation/native";
 
 const MAIN_FONT_FAMILY = "Verdana";
 
@@ -57,18 +52,19 @@ const Publish = ({ route }: PublishProps) => {
     setGame(editedGame);
   };
 
-  // TODO: TESTING
-  // 1. Unit test
-  // 2. If it's not working it's not working, the errors should work
   const publishGame = async () => {
     const values = game.slice(0, rows).map((row) => row.slice(0, cols));
     handleGameEntry(URLS.PUBLISH_GAME_URL, { title, values });
   };
+  const stackRoutes = useNavigationState((state) =>
+    state.routes.map((route) => route.name),
+  );
+  console.log("Navigation state:", stackRoutes);
 
   return (
     <View style={styles.screenContainer}>
       <IconHeader icons={[{ type: "home-outline", path: "Home" }]} />
-      {/* EditTitle */}
+      {/* Editable Title */}
       <View style={styles.editTitleContainer}>
         <TextInput
           placeholder="Enter Game Name"
