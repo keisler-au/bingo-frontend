@@ -9,7 +9,6 @@ import JoinGameInput from "./Join";
 import VerticalReel from "./VerticalReel";
 
 import bingoGames from "../templateFixtures";
-import { useNavigationState } from "@react-navigation/native";
 
 const Home = () => {
   const [expanded, setExpanded] = useState(false);
@@ -31,10 +30,7 @@ const Home = () => {
     expandedGridset.current = bingoGames[gridset];
     setExpanded(!expanded);
   };
-  const stackRoutes = useNavigationState((state) =>
-    state.routes.map((route) => route.name),
-  );
-  console.log("Navigation state:", stackRoutes);
+
   return (
     <SafeAreaView style={styles.background}>
       <IconHeader icons={icons} onPress={() => setPlayerModal(true)} />

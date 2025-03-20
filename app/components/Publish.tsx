@@ -19,7 +19,6 @@ import { RootStackParamList } from "../types";
 import { reformatGame } from "../utils/gameActions";
 import useGameEntry from "../utils/useGameEntry";
 import { StackScreenProps } from "@react-navigation/stack";
-import { useNavigationState } from "@react-navigation/native";
 
 const MAIN_FONT_FAMILY = "Verdana";
 
@@ -56,10 +55,6 @@ const Publish = ({ route }: PublishProps) => {
     const values = game.slice(0, rows).map((row) => row.slice(0, cols));
     handleGameEntry(URLS.PUBLISH_GAME_URL, { title, values });
   };
-  const stackRoutes = useNavigationState((state) =>
-    state.routes.map((route) => route.name),
-  );
-  console.log("Navigation state:", stackRoutes);
 
   return (
     <View style={styles.screenContainer}>

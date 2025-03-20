@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react-native";
-import Play from "../Play";
+import Play from "../../app/components/Play";
 
 describe("Play Component", () => {
   const mockRoute = {

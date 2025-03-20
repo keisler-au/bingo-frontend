@@ -1,8 +1,8 @@
-import useGameEntry from "../useGameEntry";
-import RequestService from "../../services";
 import { renderHook } from "@testing-library/react-native";
+import useGameEntry from "../../app/utils/useGameEntry";
+import RequestService from "../../app/services";
 
-jest.mock("../../services", () => ({
+jest.mock("../../app/services", () => ({
   sendRequest: jest.fn(),
 }));
 

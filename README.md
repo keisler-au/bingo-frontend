@@ -1,50 +1,43 @@
-# Welcome to your Expo app 👋
+# Bingo Game Frontend
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Overview
 
-## Get started
+This is the frontend repository for the Bingo Game application, built using React Native and Expo. The app provides a mobile-friendly user interface for players to join and play custom-built bingo games in real time.
 
-1. Install dependencies
+### Home
 
-   ```bash
-   npm install
-   ```
+Select a pre-built template from one of the categories or join an existing game
+<>
 
-2. Start the app
+### Publish
 
-   ```bash
-    npx expo start
-   ```
+Publish the pre-built template or customise it to make it your own
+<>
 
-In the output, you'll find options to open the app in a
+### Play
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+Complete squares and experience real-time updates from other players
+<>
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+###
 
-## Get a fresh project
+## Technologies Used
 
-When you're ready, run:
+- **React Native** - Mobile framework for cross-platform development
+- **Expo** - Managed workflow for easy development and deployment
 
-```bash
-npm run reset-project
-```
+## Features
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+- Real-time game updates via WebSockets
+- Offline game functionality using expo-secure-storage and backend Redis queues
 
-## Learn more
+## Contributing
 
-To learn more about developing your project with Expo, look at the following resources:
+1. Fork the repo
+2. Create a new branch (`feature-branch`)
+3. Commit your changes
+4. Push to your branch and create a pull request
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Contact
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+For any issues, open a GitHub issue or reach out to `joshkeisler.au@gmail.com`.

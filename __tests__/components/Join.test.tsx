@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react-native";
-import JoinGameInput from "../Join";
+import JoinGameInput from "../../app/components/Join";
 
 describe("Join Game Input Fields", () => {
   afterEach(() => {

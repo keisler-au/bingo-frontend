@@ -1,5 +1,5 @@
-import { sendSavedQueue } from "../gameActions";
 import { getItemAsync, deleteItemAsync } from "expo-secure-store";
+import { sendSavedQueue } from "../../app/utils/gameActions";
 
 describe("sendSavedQueue", () => {
   const mockSendJsonMessage = jest.fn();

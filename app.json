@@ -32,7 +32,8 @@
           "image": "./assets/images/splash-icon.png"
         }
       ],
-      "sentry-expo"
+      "sentry-expo",
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true

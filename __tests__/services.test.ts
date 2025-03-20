@@ -1,4 +1,4 @@
-import RequestService from "./services";
+import RequestService from "../app/services";
 
 describe("RequestService", () => {
   let url: string;
