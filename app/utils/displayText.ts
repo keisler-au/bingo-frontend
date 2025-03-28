@@ -1,4 +1,4 @@
-import { Player, Task as Square } from "../types";
+import { Task as Square } from "../types";
 
 export const formatTime = (dateString: string) => {
   const date = new Date(dateString);
@@ -9,10 +9,8 @@ export const formatTime = (dateString: string) => {
   });
 };
 
-const getFirstType = (
-  { completed_by }: { completed_by: Player },
-  playerId: number,
-) => (completed_by.id === playerId ? "value" : "completed_by");
+const getFirstType = (completedInCurrentSession: true | undefined) =>
+  completedInCurrentSession ? "value" : "completed_by";
 
 const getNextType = (attr: string) => {
   const displayOrder = ["value", "completed_by", "last_updated"];
@@ -31,10 +29,10 @@ const formatDisplayText = (attrType: string, attrValue: any) => {
   }
 };
 
-export const addDisplayTextDetails = (square: Square, playerId: number) => {
+export const addDisplayTextDetails = (square: Square) => {
   const displayType =
     square.displayType == null
-      ? getFirstType(square, playerId)
+      ? getFirstType(square.currentSession)
       : getNextType(square.displayType);
   const displayText = formatDisplayText(displayType, square[displayType]);
   return { ...square, displayText, displayType };

@@ -26,12 +26,8 @@ export const sendSavedQueue = async (sendJsonMessage: Function) => {
   }
 };
 
-export const updateGame = (
-  square: Square,
-  playerId: number,
-  game: Square[][],
-) => {
-  square = addDisplayTextDetails(square, playerId);
+export const updateGame = (square: Square, game: Square[][]) => {
+  square = addDisplayTextDetails(square);
   let updated = game.map((row) => [...row]);
   updated[square.grid_row][square.grid_column] = square;
   return updated;

@@ -38,7 +38,7 @@ const GameGrid = ({ game, onDisplayChange, onComplete }: GridProps) => {
                     }
                   }}
                 >
-                  <Text style={[styles.gridText]}>
+                  <Text style={styles.gridText}>
                     {square.completed && square.displayText
                       ? square.displayText
                       : square.value}

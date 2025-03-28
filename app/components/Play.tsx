@@ -75,7 +75,7 @@ const Play = ({ route }: PlayProps) => {
         game[recievedSquare.grid_row][recievedSquare.grid_column],
       );
       if (isEqual(recievedSquare, earliestSquare)) {
-        const updatedGame = updateGame(recievedSquare, player.id, game);
+        const updatedGame = updateGame(recievedSquare, game);
         setGame(updatedGame);
         saveGameToStorage({ ...route.params.game, tasks: updatedGame });
       }
@@ -104,8 +104,13 @@ const Play = ({ route }: PlayProps) => {
     const currentSquare = game[square.grid_row][square.grid_column];
     const earliestSquare = verifyEarliestCompletedSquare(square, currentSquare);
     if (isEqual(square, earliestSquare)) {
-      square = { ...square, completed: true, completed_by: player };
-      const updatedGame = updateGame(square, player.id, game);
+      square = {
+        ...square,
+        completed: true,
+        completed_by: player,
+        currentSession: true,
+      };
+      const updatedGame = updateGame(square, game);
       setGame(updatedGame);
       saveGameToStorage({ ...route.params.game, tasks: updatedGame });
       setCompletedSquare(square);
@@ -113,7 +118,8 @@ const Play = ({ route }: PlayProps) => {
   };
 
   const taskDisplayChange = (square: Square) => {
-    setGame(updateGame(square, player.id, game));
+    const updatedGame = updateGame(square, game);
+    setGame(updatedGame);
   };
 
   return (
