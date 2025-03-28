@@ -5,8 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 interface IconHeaderProps {
   icons: {
     type: string;
-    path: string;
-    modal?: boolean;
+    path: string | false;
   }[];
   onPress?: Function;
 }
@@ -18,7 +17,7 @@ const IconHeader = ({ icons, onPress }: IconHeaderProps) => {
         <TouchableOpacity
           key={index}
           onPress={() =>
-            (icon.modal && !!onPress && onPress()) ||
+            (!icon.path && !!onPress && onPress()) ||
             (icon.path === "Home" && navigation.popToTop()) ||
             navigation.navigate(icon.path)
           }

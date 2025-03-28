@@ -8,7 +8,7 @@ import IconHeader from "./IconHeader";
 import JoinGameInput from "./Join";
 import VerticalReel from "./VerticalReel";
 
-import bingoGames from "../templateFixtures";
+import bingoGames from "../fixtures/templates";
 
 const Home = () => {
   const [expanded, setExpanded] = useState(false);
@@ -21,8 +21,7 @@ const Home = () => {
     },
     {
       type: "person-circle-outline",
-      path: "Profile",
-      modal: true,
+      path: false,
     },
   ];
 

@@ -6,7 +6,7 @@ import Animated, {
 } from "react-native-reanimated";
 
 import CarouselItem from "./CarouselItem";
-import bingoGames from "../templateFixtures";
+import bingoGames from "../fixtures/templates";
 
 const { width } = Dimensions.get("window");
 const CARD_WIDTH = width * 0.5;

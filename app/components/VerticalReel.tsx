@@ -12,7 +12,7 @@ import { useNavigation, NavigationProp } from "@react-navigation/native";
 import { RootStackParamList } from "../types";
 
 const { width } = Dimensions.get("window");
-const GRID_SIZE = width / 1.35;
+const GRID_SIZE = width / 1.1;
 
 interface VerticalReelProps {
   collapseReel: (gridset: string) => void;
@@ -92,5 +92,6 @@ const styles = StyleSheet.create({
     width: GRID_SIZE / 5,
     justifyContent: "center",
     alignItems: "center",
+    padding: 5,
   },
 });

@@ -1,9 +1,17 @@
+import * as Sentry from "sentry-expo";
+
+let URLS;
+let STORAGE_KEYS: { [key: string]: string };
 const SENTRY_DNS = process.env.EXPO_PUBLIC_SENTRY_DNS;
-const SERVER =
-  process.env.NODE_ENV === "production"
-    ? process.env.EXPO_PUBLIC_PROD_SERVER
-    : process.env.EXPO_PUBLIC_DEV_SERVER;
-export const URLS = {
+const SERVER = __DEV__
+  ? process.env.EXPO_PUBLIC_DEV_SERVER
+  : process.env.EXPO_PUBLIC_PROD_SERVER;
+
+if (!SERVER) {
+  console.error(`SERVER = ${SERVER}, __DEV__ = ${__DEV__}`);
+  Sentry.Native.captureException(`SERVER = ${SERVER}, __DEV__ = ${__DEV__}`);
+}
+URLS = {
   PUBLISH_GAME_URL: `https://${SERVER}/${process.env.EXPO_PUBLIC_PUBLISH_GAME}`,
   JOIN_GAME_URL: `https://${SERVER}/${process.env.EXPO_PUBLIC_JOIN_GAME}`,
   CREATE_PLAYER_URL: `https://${SERVER}/${process.env.EXPO_PUBLIC_CREATE_PLAYER}`,
@@ -11,10 +19,11 @@ export const URLS = {
   SENTRY_DNS,
 };
 
-const STORAGE_KEYS: { [key: string]: string } = {};
+STORAGE_KEYS = {};
 ["player", "offlineUpdatesQueue", "offlineGameState"].forEach(
   (key) => (STORAGE_KEYS[key] = key),
 );
-export { STORAGE_KEYS };
+
+export { STORAGE_KEYS, URLS };
 
 export default {};

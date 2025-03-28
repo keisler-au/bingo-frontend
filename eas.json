@@ -11,11 +11,29 @@
     },
     "preview": {
       "distribution": "internal",
-      "channel": "preview"
+      "channel": "preview",
+      "env": {
+        "EXPO_PUBLIC_SENTRY_DNS": "https://16accc8a214900f07cdcb3223bc5547f@o4508975238610944.ingest.de.sentry.io/4508975320596560",
+        "EXPO_PUBLIC_PROD_SERVER": "bingo-j8k6.onrender.com",
+        "EXPO_PUBLIC_DEV_SERVER": "ngrok",
+        "EXPO_PUBLIC_PUBLISH_GAME": "game/publish_game/",
+        "EXPO_PUBLIC_JOIN_GAME": "game/join_game/",
+        "EXPO_PUBLIC_CREATE_PLAYER": "game/create_player/",
+        "EXPO_PUBLIC_GAME_UPDATES": "game_updates/"
+      }
     },
     "production": {
       "autoIncrement": true,
-      "channel": "production"
+      "channel": "production",
+      "env": {
+        "EXPO_PUBLIC_SENTRY_DNS": "https://16accc8a214900f07cdcb3223bc5547f@o4508975238610944.ingest.de.sentry.io/4508975320596560",
+        "EXPO_PUBLIC_PROD_SERVER": "bingo-j8k6.onrender.com",
+        "EXPO_PUBLIC_DEV_SERVER": "ngrok",
+        "EXPO_PUBLIC_PUBLISH_GAME": "game/publish_game/",
+        "EXPO_PUBLIC_JOIN_GAME": "game/join_game/",
+        "EXPO_PUBLIC_CREATE_PLAYER": "game/create_player/",
+        "EXPO_PUBLIC_GAME_UPDATES": "game_updates/"
+      }
     }
   },
   "submit": {

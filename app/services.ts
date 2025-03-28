@@ -11,7 +11,6 @@ class RequestService {
   static async sendRequest(url: string, data: any) {
     let response;
     let error: boolean | string = false;
-    // TODO: TESTING
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 5000);
@@ -23,6 +22,7 @@ class RequestService {
       });
       clearTimeout(timeoutId);
     } catch (e: any) {
+      console.error(e);
       Sentry.Native.captureException(e);
       error = this.FAILED_CONNECTION;
     }

@@ -49,7 +49,7 @@ const Play = ({ route }: PlayProps) => {
   const isOffline = !netInfo.isConnected;
 
   const { sendJsonMessage, lastJsonMessage } = useWebSocket<{ data: any }>(
-    `${URLS.WEBSOCKET_UPDATES_URL}/${route.params.game.id}/${player.id}/`,
+    `${URLS.WEBSOCKET_UPDATES_URL}${route.params.game.id}/${player.id}/`,
     {
       onReconnectStop: (e) => {
         setErrorModal(RequestService.WEBSOCKET_FAILURE);

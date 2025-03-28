@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   gridText: {
+    padding: 5,
     borderWidth: 0.5,
     fontSize: 15,
     textAlign: "center",
