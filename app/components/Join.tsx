@@ -15,10 +15,12 @@ import FailedConnectionModal from "./FailedConnectionModal";
 import { getItemAsync } from "expo-secure-store";
 import { STORAGE_KEYS, URLS } from "../constants";
 import useGameEntry from "../utils/useGameEntry";
+import { useNavigation } from "@react-navigation/native";
 
 const MAIN_FONT_FAMILY = "Verdana";
 
 const JoinGameInput = () => {
+  const navigation = useNavigation();
   const [code, setCode] = useState(["", "", "", "", "", ""]);
   const [active, setActive] = useState(false);
   const [submit, setSubmit] = useState(false);
@@ -49,8 +51,14 @@ const JoinGameInput = () => {
         }
       }
     };
-    enterPreviousGameCode();
-  }, []);
+    const focusListener = navigation.addListener(
+      "focus",
+      enterPreviousGameCode,
+    );
+    return () => {
+      focusListener();
+    };
+  }, [navigation]);
 
   const handleChange = (text: string, index: number) => {
     if (!/^[A-Z0-9]*$/.test(text)) return;

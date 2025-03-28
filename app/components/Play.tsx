@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Share } from "react-native";
 import useWebSocket from "react-use-websocket";
 import IconHeader from "./IconHeader";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import * as Sentry from "sentry-expo";
-// @ts-ignore
 import BottomSheet from "react-native-simple-bottom-sheet";
 import { useNetInfo } from "@react-native-community/netinfo";
-// @ts-ignore
 import { isEqual } from "lodash";
 import { URLS } from "../constants";
 import { RootStackParamList, Task as Square } from "../types";
@@ -42,11 +40,19 @@ const webSocketConfig = {
 type PlayProps = StackScreenProps<RootStackParamList, "Play">;
 const Play = ({ route }: PlayProps) => {
   const [game, setGame] = useState(route.params.game.tasks);
+  const [saveGame, setSaveGame] = useState(true);
   const [completedSquare, setCompletedSquare] = useState<Square | null>(null);
   const [errorModal, setErrorModal] = useState<string | false>(false);
   const player = route.params.player;
   const netInfo = useNetInfo();
   const isOffline = !netInfo.isConnected;
+
+  useEffect(() => {
+    if (saveGame && route.params.game) {
+      saveGameToStorage({ ...route.params.game, tasks: game });
+      setSaveGame(false);
+    }
+  }, [saveGame, route.params.game]);
 
   const { sendJsonMessage, lastJsonMessage } = useWebSocket<{ data: any }>(
     `${URLS.WEBSOCKET_UPDATES_URL}${route.params.game.id}/${player.id}/`,

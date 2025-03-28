@@ -38,9 +38,9 @@ export const updateGame = (
 };
 
 export const saveGameToStorage = async (game: Game) => {
-  setItemAsync(
+  await setItemAsync(
     STORAGE_KEYS.offlineGameState,
-    JSON.stringify({ ...game, tasks: game, lastSaved: Date.now() }),
+    JSON.stringify({ ...game, lastSaved: Date.now() }),
   );
 };
 

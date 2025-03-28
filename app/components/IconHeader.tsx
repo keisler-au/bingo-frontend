@@ -16,11 +16,11 @@ const IconHeader = ({ icons, onPress }: IconHeaderProps) => {
       {icons.map((icon, index) => (
         <TouchableOpacity
           key={index}
-          onPress={() =>
-            (!icon.path && !!onPress && onPress()) ||
-            (icon.path === "Home" && navigation.popToTop()) ||
-            navigation.navigate(icon.path)
-          }
+          onPress={() => {
+            if (!icon.path && !!onPress) onPress();
+            else if (icon.path === "Home") navigation.popToTop();
+            else navigation.navigate(icon.path);
+          }}
         >
           <Ionicons name={icon.type} size={30} />
         </TouchableOpacity>

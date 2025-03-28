@@ -22,12 +22,14 @@ const VerticalReel = ({ collapseReel, expandedGridset }: VerticalReelProps) => {
   const navigation =
     useNavigation<NavigationProp<RootStackParamList, "Publish">>();
 
-  const handleNavigation = (gameIndex: number) =>
-    expandedGridset &&
-    navigation.navigate("Publish", { game: expandedGridset[gameIndex] });
+  const handleNavigation = (gameIndex: number) => {
+    if (expandedGridset) {
+      navigation.navigate("Publish", { game: expandedGridset[gameIndex] });
+      collapseReel("");
+    }
+  };
 
   return (
-    // @ts-ignore
     <Pressable style={styles.pressableScreen} onPress={collapseReel}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View
