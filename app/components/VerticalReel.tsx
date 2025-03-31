@@ -10,6 +10,8 @@ import {
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 
 import { RootStackParamList } from "../types";
+import { GlobalStyleContext } from "./settingsUtils";
+import { useContext } from "react";
 
 const { width } = Dimensions.get("window");
 const GRID_SIZE = width / 1.1;
@@ -21,6 +23,7 @@ interface VerticalReelProps {
 const VerticalReel = ({ collapseReel, expandedGridset }: VerticalReelProps) => {
   const navigation =
     useNavigation<NavigationProp<RootStackParamList, "Publish">>();
+  const { globalStyles } = useContext(GlobalStyleContext);
 
   const handleNavigation = (gameIndex: number) => {
     if (expandedGridset) {
@@ -30,7 +33,10 @@ const VerticalReel = ({ collapseReel, expandedGridset }: VerticalReelProps) => {
   };
 
   return (
-    <Pressable style={styles.pressableScreen} onPress={collapseReel}>
+    <Pressable
+      style={[styles.pressableScreen, globalStyles]}
+      onPress={collapseReel}
+    >
       <ScrollView showsVerticalScrollIndicator={false}>
         <View
           style={[
@@ -87,6 +93,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     borderRadius: 5,
+    backgroundColor: "#F0F0F0",
   },
   square: {
     borderWidth: 0.2,

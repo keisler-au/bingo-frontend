@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   ActivityIndicator,
   View,
@@ -19,6 +19,8 @@ import { RootStackParamList } from "../types";
 import { reformatGame } from "../utils/gameActions";
 import useGameEntry from "../utils/useGameEntry";
 import { StackScreenProps } from "@react-navigation/stack";
+import ScreenBackground from "./ScreenBackground";
+import { GlobalStyleContext } from "./settingsUtils";
 
 const MAIN_FONT_FAMILY = "Verdana";
 
@@ -26,6 +28,7 @@ const GRID_OPTIONS = ["5x5", "4x5", "4x4", "3x4", "3x3"];
 
 type PublishProps = StackScreenProps<RootStackParamList, "Publish">;
 const Publish = ({ route }: PublishProps) => {
+  const { globalStyles } = useContext(GlobalStyleContext);
   const [selectedGridSize, setSelectedGridSize] = useState("5x5");
   const [rows, setRows] = useState(5);
   const [cols, setCols] = useState(5);
@@ -57,7 +60,7 @@ const Publish = ({ route }: PublishProps) => {
   };
 
   return (
-    <View style={styles.screenContainer}>
+    <ScreenBackground localStyles={styles.screenContainer}>
       <IconHeader icons={[{ type: "home-outline", path: "Home" }]} />
       {/* Editable Title */}
       <View style={styles.editTitleContainer}>
@@ -75,11 +78,19 @@ const Publish = ({ route }: PublishProps) => {
         cols={cols}
         onChange={changeGridText}
       />
-      <View style={styles.pickerHelper} />
+      <View
+        style={[
+          styles.pickerHelper,
+          { backgroundColor: globalStyles.backgroundColor },
+        ]}
+      />
       <Picker
         selectedValue={selectedGridSize}
         onValueChange={selectGridSize}
-        style={styles.picker}
+        style={[
+          styles.picker,
+          { backgroundColor: globalStyles.backgroundColor },
+        ]}
       >
         {GRID_OPTIONS.map((option) => (
           <Picker.Item key={option} label={option} value={option} />
@@ -105,7 +116,7 @@ const Publish = ({ route }: PublishProps) => {
         message={error}
         onClose={() => setError(false)}
       />
-    </View>
+    </ScreenBackground>
   );
 };
 
@@ -114,7 +125,6 @@ const styles = StyleSheet.create({
     position: "relative",
     alignItems: "center",
     height: "100%",
-    backgroundColor: "#FAF9F6",
   },
   editTitleContainer: {
     marginTop: 88,
@@ -137,7 +147,6 @@ const styles = StyleSheet.create({
     bottom: "32%",
     left: "35%",
     right: "35%",
-    backgroundColor: "#FAF9F6",
     zIndex: 1,
   },
   picker: {
@@ -148,7 +157,6 @@ const styles = StyleSheet.create({
     height: 165,
     marginVertical: 0,
     overflow: "hidden",
-    backgroundColor: "#FAF9F6",
   },
   button: {
     position: "absolute",

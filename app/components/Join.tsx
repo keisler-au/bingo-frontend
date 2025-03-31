@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import {
   ActivityIndicator,
   View,
@@ -16,11 +16,13 @@ import { getItemAsync } from "expo-secure-store";
 import { STORAGE_KEYS, URLS } from "../constants";
 import useGameEntry from "../utils/useGameEntry";
 import { useNavigation } from "@react-navigation/native";
+import { GlobalStyleContext } from "./settingsUtils";
 
 const MAIN_FONT_FAMILY = "Verdana";
 
 const JoinGameInput = () => {
   const navigation = useNavigation();
+  const { globalStyles } = useContext(GlobalStyleContext);
   const [code, setCode] = useState(["", "", "", "", "", ""]);
   const [active, setActive] = useState(false);
   const [submit, setSubmit] = useState(false);
@@ -97,7 +99,7 @@ const JoinGameInput = () => {
 
   return (
     <Pressable
-      style={containerStyles(active).container}
+      style={[containerStyles(active).container, globalStyles]}
       onPress={handleCollapse}
     >
       <Text style={styles.label}>Join</Text>
@@ -170,7 +172,6 @@ const containerStyles = (active = false) =>
       left: 0,
       alignItems: "center",
       zIndex: 100,
-      backgroundColor: "#F0F0F0",
     },
   });
 
@@ -192,6 +193,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 20,
     borderRadius: 5,
+    // backgroundColor: "#F0F0F0",
   },
   dash: {
     height: 1,
@@ -205,6 +207,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 8,
     marginTop: 35,
+    // backgroundColor: "#F0F0F0",
   },
   buttonText: {
     fontFamily: MAIN_FONT_FAMILY,

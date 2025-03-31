@@ -9,11 +9,13 @@ import JoinGameInput from "./Join";
 import VerticalReel from "./VerticalReel";
 
 import bingoGames from "../fixtures/templates";
+import ScreenBackground from "./ScreenBackground";
 
 const Home = () => {
   const [expanded, setExpanded] = useState(false);
   const [playerModal, setPlayerModal] = useState(false);
   const expandedGridset = useRef<string[][]>();
+
   const icons = [
     {
       type: "settings-outline",
@@ -31,22 +33,24 @@ const Home = () => {
   };
 
   return (
-    <SafeAreaView style={styles.background}>
-      <IconHeader icons={icons} onPress={() => setPlayerModal(true)} />
-      <Carousel isVerticalReel={isVerticalReel} />
-      {expanded ? (
-        <VerticalReel
-          collapseReel={isVerticalReel}
-          expandedGridset={expandedGridset.current}
+    <ScreenBackground>
+      <SafeAreaView style={styles.background}>
+        <IconHeader icons={icons} onPress={() => setPlayerModal(true)} />
+        <Carousel isVerticalReel={isVerticalReel} />
+        {expanded ? (
+          <VerticalReel
+            collapseReel={isVerticalReel}
+            expandedGridset={expandedGridset.current}
+          />
+        ) : (
+          <JoinGameInput />
+        )}
+        <CreatePlayerModal
+          displayModal={playerModal}
+          onClose={() => setPlayerModal(false)}
         />
-      ) : (
-        <JoinGameInput />
-      )}
-      <CreatePlayerModal
-        displayModal={playerModal}
-        onClose={() => setPlayerModal(false)}
-      />
-    </SafeAreaView>
+      </SafeAreaView>
+    </ScreenBackground>
   );
 };
 

@@ -33,10 +33,33 @@ export const updateGame = (square: Square, game: Square[][]) => {
   return updated;
 };
 
+export const getGameHistory = async () => {
+  return JSON.parse(await getItemAsync(STORAGE_KEYS.gameHistory)) || [];
+};
+
+export const addToGameHistory = async (game: Game) => {
+  const gameHistory = await getGameHistory();
+  const gameAlreadyAdded = gameHistory.some(
+    (g: { code: string }) => g.code === game.code,
+  );
+  if (!gameAlreadyAdded) {
+    const currentGame = {
+      title: game.title,
+      code: game.code,
+      date: new Date(Date.now()).toLocaleDateString(),
+    };
+    await setItemAsync(
+      STORAGE_KEYS.gameHistory,
+      JSON.stringify([...gameHistory, currentGame]),
+    );
+  }
+};
+
 export const saveGameToStorage = async (game: Game) => {
+  const lastSaved = Date.now();
   await setItemAsync(
     STORAGE_KEYS.offlineGameState,
-    JSON.stringify({ ...game, lastSaved: Date.now() }),
+    JSON.stringify({ ...game, lastSaved }),
   );
 };
 

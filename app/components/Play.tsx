@@ -4,8 +4,10 @@ import useWebSocket from "react-use-websocket";
 import IconHeader from "./IconHeader";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import * as Sentry from "sentry-expo";
+// @ts-ignore
 import BottomSheet from "react-native-simple-bottom-sheet";
 import { useNetInfo } from "@react-native-community/netinfo";
+// @ts-ignore
 import { isEqual } from "lodash";
 import { URLS } from "../constants";
 import { RootStackParamList, Task as Square } from "../types";
@@ -20,6 +22,7 @@ import FailedConnectionModal from "./FailedConnectionModal";
 import RequestService from "../services";
 import GameGrid from "./GameGrid";
 import { StackScreenProps } from "@react-navigation/stack";
+import ScreenBackground from "./ScreenBackground";
 
 const webSocketConfig = {
   heartbeat: {
@@ -123,7 +126,7 @@ const Play = ({ route }: PlayProps) => {
   };
 
   return (
-    <View style={styles.screenContainer}>
+    <ScreenBackground localStyles={styles.screenContainer}>
       <IconHeader icons={[{ type: "home-outline", path: "Home" }]} />
       <Text style={styles.gameCode}>Game Code</Text>
       <View testID="shareButton" style={styles.shareContainer}>
@@ -131,9 +134,7 @@ const Play = ({ route }: PlayProps) => {
         <Feather name="share" onPress={shareContent} size={25} />
       </View>
       <View style={styles.titleContainer}>
-        <Text style={styles.title}>
-          {route.params.game.title || `Game${route.params.game.code}`}
-        </Text>
+        <Text style={styles.title}>{route.params.game.title}</Text>
       </View>
       <GameGrid
         game={game}
@@ -165,7 +166,7 @@ const Play = ({ route }: PlayProps) => {
         message={errorModal}
         onClose={() => setErrorModal(false)}
       />
-    </View>
+    </ScreenBackground>
   );
 };
 

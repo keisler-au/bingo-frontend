@@ -1,24 +1,18 @@
 diff --git a/node_modules/react-native-simple-bottom-sheet/index.js b/node_modules/react-native-simple-bottom-sheet/index.js
-index 56d6ef8..784be93 100644
+index 56d6ef8..97ffd9a 100644
 --- a/node_modules/react-native-simple-bottom-sheet/index.js
 +++ b/node_modules/react-native-simple-bottom-sheet/index.js
-@@ -57,13 +57,13 @@ class BottomSheet extends Component {
-     return this.state.isPanelOpened;
+@@ -58,11 +58,11 @@ class BottomSheet extends Component {
    };
 
--  componentDidMount() {
+   componentDidMount() {
 -    BackHandler.addEventListener('hardwareBackPress', this._onBackPress);
--  }
-+  // componentDidMount() {
-+  //   BackHandler.addEventListener('hardwareBackPress', this._onBackPress);
-+  // }
++    // BackHandler.addEventListener('hardwareBackPress', this._onBackPress);
+   }
 
--  componentWillUnmount() {
+   componentWillUnmount() {
 -    BackHandler.removeEventListener('hardwareBackPress', this._onBackPress);
--  }
-+  // componentWillUnmount() {
-+  //   BackHandler.removeEventListener('hardwareBackPress', this._onBackPress);
-+  // }
++    // BackHandler.removeEventListener('hardwareBackPress', this._onBackPress);
+   }
 
    _setPanResponders() {
-     this._parentPanResponder = PanResponder.create({

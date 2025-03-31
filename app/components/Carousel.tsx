@@ -61,6 +61,6 @@ const styles = StyleSheet.create({
   carousel: {
     marginTop: 100,
     width: width,
-    maxHeight: "35%",
+    maxHeight: "36%",
   },
 });

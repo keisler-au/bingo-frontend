@@ -78,7 +78,7 @@ const completeTaskStyles = (completed: boolean) =>
       shadowOpacity: 0.2,
       shadowRadius: completed ? 0 : 1,
       shadowOffset: { width: 0, height: completed ? 0 : 4 },
-      backgroundColor: completed ? "#e0e0e0" : "#ffffff",
+      backgroundColor: completed ? "rgb(0,0,0,0)" : "white",
     },
   });
 

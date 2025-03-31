@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 interface IconHeaderProps {
   icons: {
-    type: string;
+    type: any;
     path: string | false;
   }[];
   onPress?: Function;

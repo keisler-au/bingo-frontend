@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 import { getItemAsync } from "expo-secure-store";
 
-import { saveGameToStorage } from "./gameActions";
+import { addToGameHistory, saveGameToStorage } from "./gameActions";
 import { Game, RootStackParamList } from "../types";
 import { STORAGE_KEYS } from "../constants";
 import RequestService from "../services";
@@ -41,7 +41,8 @@ const useGameEntry = () => {
       const { response, error } = await RequestService.sendRequest(url, data);
       if (response?.ok && !error) {
         const game = (await response.json()).game;
-        saveGameToStorage(game);
+        addToGameHistory(game);
+        // saveGameToStorage(game);
         navigation.navigate("Play", { game, player });
       }
       setError(error);

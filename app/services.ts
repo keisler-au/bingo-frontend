@@ -18,7 +18,7 @@ class RequestService {
         signal: controller.signal,
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ data }),
+        body: JSON.stringify(data),
       });
       clearTimeout(timeoutId);
     } catch (e: any) {
