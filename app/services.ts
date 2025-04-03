@@ -7,6 +7,8 @@ class RequestService {
     "The entry used did not connect, please check it's correct and try again.";
   static WEBSOCKET_FAILURE =
     "We failed to connect to the server. If the issue re-occurs please report it via Settings";
+  static SERVER_ERROR =
+    "There was an issue with the server. If it re-occurs please report it via Settings";
 
   static async sendRequest(url: string, data: any) {
     let response;
@@ -27,8 +29,11 @@ class RequestService {
       error = this.FAILED_CONNECTION;
     }
 
-    if (response?.status === 404) error = this.NOT_FOUND;
-    if (response?.status === 400) error = this.FAILED_CONNECTION;
+    if (response?.status) {
+      if (response?.status === 400) error = this.FAILED_CONNECTION;
+      else if (response?.status === 404) error = this.NOT_FOUND;
+      else if (response?.status > 399) error = this.SERVER_ERROR;
+    }
 
     return { response, error };
   }

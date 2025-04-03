@@ -42,7 +42,6 @@ const useGameEntry = () => {
       if (response?.ok && !error) {
         const game = (await response.json()).game;
         addToGameHistory(game);
-        // saveGameToStorage(game);
         navigation.navigate("Play", { game, player });
       }
       setError(error);

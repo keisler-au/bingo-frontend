@@ -29,8 +29,8 @@ const CreatePlayerModal = ({ displayModal, onClose }: CreatePlayerProps) => {
       const storedPlayer = await getItemAsync(STORAGE_KEYS.player);
       storedPlayer && setName(JSON.parse(storedPlayer).name);
     };
-    name === undefined && getName();
-  }, [displayModal, name]);
+    getName();
+  }, [displayModal]);
 
   const handleSubmit = async () => {
     if (loading) return;
