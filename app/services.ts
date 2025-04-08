@@ -24,8 +24,6 @@ class RequestService {
       });
       clearTimeout(timeoutId);
     } catch (e: any) {
-      console.error(e);
-      Sentry.Native.captureException(e);
       error = this.FAILED_CONNECTION;
     }
 
@@ -33,6 +31,11 @@ class RequestService {
       if (response?.status === 400) error = this.FAILED_CONNECTION;
       else if (response?.status === 404) error = this.NOT_FOUND;
       else if (response?.status > 399) error = this.SERVER_ERROR;
+    }
+    if (error) {
+      const error_message = `Error: ${error}\nURL: ${url}\nData: ${data}`;
+      console.error(error_message);
+      Sentry.Native.captureException(error_message);
     }
 
     return { response, error };
