@@ -7,17 +7,17 @@ This is the frontend repository for the Tacker Bingo application built using Rea
 ### Home
 
 Select a pre-built template from one of the categories or join an existing game
-![Home page](assets/bingo_home.jpg)
+<img src="assets/bingo_home.jpg" alt="Home page" width="200"/>
 
 ### Publish
 
 Publish the pre-built template or customise it to make it your own
-![Publish page](assets/bingo_publish.jpg)
+<img src="assets/bingo_publish.jpg" alt="Publish Page" width="200"/>
 
 ### Play
 
 Complete squares and experience real-time updates from other players
-![Play page](assets/bingo_play.jpg)
+<img src="assets/bingo_play.jpg" alt="Play Page" width="200"/>
 
 ## Technologies Used
 
