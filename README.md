@@ -1,33 +1,37 @@
-# Bingo Game Frontend
+# Tacker Bingo
 
 ## Overview
 
-This is the frontend repository for the Bingo Game application, built using React Native and Expo. The app provides a mobile-friendly user interface for players to join and play custom-built bingo games in real time.
+This is the frontend repository for the Tacker Bingo application built using React Native and Expo. The app provides a mobile-friendly user interface for players to join and play custom-built bingo games for social events. The backend repo is built using Django, Postgres and Redis, providing real-time gameplay updates and offline queueing functionality.
 
 ### Home
 
 Select a pre-built template from one of the categories or join an existing game
-<>
+![Home page](assets/bingo_home.jpg)
 
 ### Publish
 
 Publish the pre-built template or customise it to make it your own
-<>
+![Publish page](assets/bingo_publish.jpg)
 
 ### Play
 
 Complete squares and experience real-time updates from other players
-<>
-
-###
+![Play page](assets/bingo_play.jpg)
 
 ## Technologies Used
 
-- **React Native** - Mobile framework for cross-platform development
-- **Expo** - Managed workflow for easy development and deployment
+- **React Native**
+- **Typescript**
+- **Expo**
+- **Django**
+- **Postgres**
+- **Redis**
 
 ## Features
 
+- Infinite carousel
+- Intuitive UI and relevant pop up modals
 - Real-time game updates via WebSockets
 - Offline game functionality using expo-secure-storage and backend Redis queues
 
@@ -40,4 +44,4 @@ Complete squares and experience real-time updates from other players
 
 ## Contact
 
-For any issues, open a GitHub issue or reach out to `joshkeisler.au@gmail.com`.
+For any issues or feedback, open a GitHub issue or reach out to `joshkeisler.au@gmail.com`.
