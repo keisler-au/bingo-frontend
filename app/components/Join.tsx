@@ -12,7 +12,7 @@ import {
 import { useNetInfo } from "@react-native-community/netinfo";
 import CreateProfileModal from "./CreateProfileModal";
 import FailedConnectionModal from "./FailedConnectionModal";
-import { getItemAsync } from "expo-secure-store";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { STORAGE_KEYS, URLS } from "../constants";
 import useGameEntry from "../utils/useGameEntry";
 import { useNavigation } from "@react-navigation/native";
@@ -41,7 +41,9 @@ const JoinGameInput = () => {
 
   useEffect(() => {
     const enterPreviousGameCode = async () => {
-      const storedGame = await getItemAsync(STORAGE_KEYS.offlineGameState);
+      const storedGame = await AsyncStorage.getItem(
+        STORAGE_KEYS.offlineGameState,
+      );
       const game = JSON.parse(storedGame || "{}");
       if (game) {
         setPreviousGame(game);

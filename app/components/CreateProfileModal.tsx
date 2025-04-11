@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getItemAsync, setItemAsync } from "expo-secure-store";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   Modal,
   View,
@@ -26,7 +26,7 @@ const CreatePlayerModal = ({ displayModal, onClose }: CreatePlayerProps) => {
 
   useEffect(() => {
     const getName = async () => {
-      const storedPlayer = await getItemAsync(STORAGE_KEYS.player);
+      const storedPlayer = await AsyncStorage.getItem(STORAGE_KEYS.player);
       storedPlayer && setName(JSON.parse(storedPlayer).name);
     };
     getName();
@@ -42,7 +42,7 @@ const CreatePlayerModal = ({ displayModal, onClose }: CreatePlayerProps) => {
     if (response?.ok && !error) {
       const player = (await response.json()).player;
       setName(player.name);
-      setItemAsync(STORAGE_KEYS.player, JSON.stringify(player));
+      AsyncStorage.setItem(STORAGE_KEYS.player, JSON.stringify(player));
     }
     onClose();
     // Time for Profile modal to close before Failed-Connection modal opens

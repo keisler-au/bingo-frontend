@@ -4,10 +4,12 @@ jest.mock("@react-native-community/netinfo", () => ({
   }),
 }));
 
-jest.mock("expo-secure-store", () => ({
-  getItemAsync: jest.fn(),
-  setItemAsync: jest.fn(),
-  deleteItemAsync: jest.fn(),
+jest.mock("@react-native-async-storage/async-storage", () => ({
+  AsyncStorage: {
+    getItem: jest.fn(),
+    setItem: jest.fn(),
+    removeItem: jest.fn(),
+  },
 }));
 
 jest.mock("react-use-websocket", () => ({

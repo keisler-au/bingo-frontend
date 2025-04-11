@@ -33,7 +33,7 @@ Complete squares and experience real-time updates from other players
 - Infinite carousel
 - Intuitive UI and relevant pop up modals
 - Real-time game updates via WebSockets
-- Offline game functionality using expo-secure-storage and backend Redis queues
+- Offline game functionality using local storage and backend Redis queues
 
 ## Contributing
 

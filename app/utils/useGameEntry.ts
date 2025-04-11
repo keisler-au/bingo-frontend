@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
-import { getItemAsync } from "expo-secure-store";
 
-import { addToGameHistory, saveGameToStorage } from "./gameActions";
+import { addToGameHistory } from "./gameActions";
 import { Game, RootStackParamList } from "../types";
 import { STORAGE_KEYS } from "../constants";
 import RequestService from "../services";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const useGameEntry = () => {
   const navigation =
@@ -15,7 +15,7 @@ const useGameEntry = () => {
   const [error, setError] = useState<string | boolean>(false);
 
   const getStoredPlayer = async () => {
-    const storedPlayer = await getItemAsync(STORAGE_KEYS.player);
+    const storedPlayer = await AsyncStorage.getItem(STORAGE_KEYS.player);
     return storedPlayer ? JSON.parse(storedPlayer) : null;
   };
 

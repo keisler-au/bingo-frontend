@@ -1,4 +1,4 @@
-import { getItemAsync, deleteItemAsync } from "expo-secure-store";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { sendSavedQueue } from "../../app/utils/gameActions";
 
 describe("sendSavedQueue", () => {
@@ -18,10 +18,10 @@ describe("sendSavedQueue", () => {
     },
   ]);
   test("saved queued items are sent and then the queue is deleted from storage", async () => {
-    getItemAsync.mockResolvedValue(mockQueue);
+    AsyncStorage.getItem.mockResolvedValue(mockQueue);
     await sendSavedQueue(mockSendJsonMessage);
 
-    expect(getItemAsync).toHaveBeenCalledWith("offlineUpdatesQueue");
+    expect(AsyncStorage.getItem).toHaveBeenCalledWith("offlineUpdatesQueue");
     expect(mockSendJsonMessage).toHaveBeenCalledTimes(2);
     expect(mockSendJsonMessage).toHaveBeenCalledWith(
       expect.objectContaining({ grid_row: 1, grid_column: 1, completed: true }),
@@ -33,7 +33,7 @@ describe("sendSavedQueue", () => {
         completed: false,
       }),
     );
-    expect(deleteItemAsync).toHaveBeenCalledWith("offlineUpdatesQueue");
+    expect(AsyncStorage.removeItem).toHaveBeenCalledWith("offlineUpdatesQueue");
   });
 
   test("nothing is sent if there are no offline updates", () => {});

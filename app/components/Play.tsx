@@ -64,8 +64,15 @@ const Play = ({ route }: PlayProps) => {
         setErrorModal(RequestService.WEBSOCKET_FAILURE);
         Sentry.Native.captureException(e);
       },
-      filter: (message) =>
-        message?.data?.task && message.data.task.completed_by.id !== player.id,
+      filter: (message) => {
+        console.log(`THIS IS RECIEVING UPDATES`);
+        console.log(`message: ${message}`);
+        console.log(`message.data: ${message.data}`);
+        console.log(`player: ${player}`);
+        return (
+          message?.data?.task && message.data.task.completed_by.id !== player.id
+        );
+      },
       ...webSocketConfig,
     },
   );
