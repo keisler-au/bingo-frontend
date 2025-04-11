@@ -4,7 +4,7 @@ class RequestService {
   static FAILED_CONNECTION =
     "We failed to connect to the server. Please try again.";
   static NOT_FOUND =
-    "The entry used did not connect, please check it's correct and try again.";
+    "404\nThe entry used did not connect, please check and try again.";
   static WEBSOCKET_FAILURE =
     "We failed to connect to the server. If the issue re-occurs please report it via Settings";
   static SERVER_ERROR =

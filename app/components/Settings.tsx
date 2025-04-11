@@ -11,12 +11,8 @@ import { Header } from "./settingsUtils";
 
 export const COLOR_OPTIONS = [
   {
-    label: "grey",
-    color: "#F0F0F0",
-  },
-  {
     label: "peach",
-    color: "rgb(241, 217, 197)",
+    color: "rgb(246, 231, 219)",
   },
   {
     label: "green",
@@ -33,6 +29,10 @@ export const COLOR_OPTIONS = [
   {
     label: "purple",
     color: "rgb(238, 220, 247)",
+  },
+  {
+    label: "grey",
+    color: "#F0F0F0",
   },
 ];
 
