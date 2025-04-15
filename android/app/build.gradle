@@ -1,7 +1,9 @@
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
+// Added when updating to Kotlin 2.0.0
 apply plugin: 'org.jetbrains.kotlin.plugin.compose'
+apply plugin: 'com.google.devtools.ksp'
 
 def projectRoot = rootDir.getAbsoluteFile().getParentFile().getAbsolutePath()
 
@@ -82,10 +84,10 @@ def enableProguardInReleaseBuilds = (findProperty('android.enableProguardInRelea
 def jscFlavor = 'org.webkit:android-jsc:+'
 
 android {
+    // Added when updating to Kotlin 2.0.0
     buildFeatures {
         compose true
     }
-
     composeOptions {
         kotlinCompilerExtensionVersion '1.5.11'
     }
@@ -95,7 +97,8 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.app"
+    // Added when updating to Kotlin 2.0.0
+    namespace "com.keislerau.sandboxapp"
     defaultConfig {
         applicationId 'com.keislerau.sandboxapp'
         minSdkVersion rootProject.ext.minSdkVersion
@@ -156,6 +159,12 @@ android {
 }
 
 dependencies {
+    // Added when updating to Kotlin 2.0.0
+    implementation("androidx.room:room-runtime:2.6.1")
+    ksp("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    implementation("androidx.compose.runtime:runtime:1.5.14")
+
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
 

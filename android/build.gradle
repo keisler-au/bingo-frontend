@@ -6,6 +6,7 @@ buildscript {
         minSdkVersion = Integer.parseInt(findProperty('android.minSdkVersion') ?: '24')
         compileSdkVersion = Integer.parseInt(findProperty('android.compileSdkVersion') ?: '35')
         targetSdkVersion = Integer.parseInt(findProperty('android.targetSdkVersion') ?: '34')
+        // Added when updating to Kotlin 2.0.0
         kotlinVersion = findProperty('android.kotlinVersion') ?: '2.0.0'
 
         ndkVersion = "26.1.10909125"
@@ -17,7 +18,10 @@ buildscript {
     dependencies {
         classpath('com.android.tools.build:gradle')
         classpath('com.facebook.react:react-native-gradle-plugin')
+        // Added when updating to Kotlin 2.0.0
         classpath('org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.0"')
+        classpath("org.jetbrains.kotlin.plugin.compose:org.jetbrains.kotlin.plugin.compose.gradle.plugin:2.0.0")
+        classpath("com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:2.1.10-RC2-1.0.29")
     }
 }
 
